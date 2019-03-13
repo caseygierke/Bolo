@@ -1,0 +1,65 @@
+.container-1, .container-2, .container-3 {
+	margin: 0 auto;
+	width: 70%;
+	text-align: center;
+	border: 1px solid blue;
+	flex-direction: row;
+}
+
+.flex-box-container-1, .flex-box-container-2, 
+.flex-box-container-3, .flex-bolo-row-1, 
+.flex-bolo-row-2, .flex-bolo-row-3 {
+	display: flex;
+	border: 1px solid black;
+	padding: 10px;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.flex-bolo-row-1, .flex-bolo-row-2 {
+	background: url('http://cheerspokernh.com/wp-content/uploads/2018/02/bigstock-poker-table-background-26587844-2-1.jpg');
+	color: #ffffff;
+}
+
+.flex-bolo-row-1 div {
+	border: 1px solid black;
+	padding: 10px;
+	flex: 1;
+	height: 350px;
+	text-align: center;
+}
+
+.flex-bolo-row-2 img {
+	width: 25%;
+	padding: 10px;
+}
+
+.flex-bolo-row-1 img:hover {
+	filter: drop-shadow(5px 5px 4px #4444dd);
+	drop-shadow: 0px 10px 50px rgba(37, 50, 233, 1);
+}
+
+.flex-bolo-row-2 button {
+	border: 1px solid black;
+}
+
+.flex-bolo-row-2 div {
+	border: 1px solid black;
+	padding: 10px;
+}
+
+table, th, td {
+	padding: 5px;
+	border: 1px solid black;
+}
+
+th, td {
+	width: 100px;
+}
+
+h3 {
+	position: absolute;
+	bottom: 0;
+	center: 0;
+}
