@@ -97,9 +97,15 @@ let boloGame = {
 	'die': ['1', '2', '3', '4', '5', '6'],
 	'diceSounds': ['diceCup', 'Hillbilly', 'SoundBible'],
 	'diceMap': {'1': 100, '5': 50},
-	// 'wins': 0,
-	// 'draws': 0,
-	// 'losses': 0,
+
+}
+
+let die = {
+	'dice-number-1': {'status': 'roll', 'onclick': "changeID()", 'value': 0, 'image': 'static/images/spinning.gif'},
+	'dice-number-2': {'status': 'roll', 'onclick': "changeID()", 'value': 0, 'image': 'static/images/spinning.gif'},
+	'dice-number-3': {'status': 'roll', 'onclick': "changeID()", 'value': 0, 'image': 'static/images/spinning.gif'},
+	'dice-number-4': {'status': 'roll', 'onclick': "changeID()", 'value': 0, 'image': 'static/images/spinning.gif'},
+	'dice-number-5': {'status': 'roll', 'onclick': "changeID()", 'value': 0, 'image': 'static/images/spinning.gif'},
 
 }
 
@@ -108,17 +114,25 @@ const COMPUTER = boloGame['computer']
 const numberOfDie = 5;
 
 // Add listeners
-document.querySelector('#bolo-roll-button').addEventListener('click', boloRoll);
+// document.querySelector('#bolo-roll-button').addEventListener('click', boloRoll);
 document.querySelector('#bolo-pass-button').addEventListener('click', boloPass);
 
-function boloRoll() {
-	// let dice = randomDice();
-	// console.log(dice);
-	showDice(YOU);
-	// boloPlay();
-	// updateScore(card, YOU);
-	showScore(YOU);
+document.querySelector('#bolo-roll-button').addEventListener('click', rollDie);
+
+function rollDie() {
+	getValues(YOU);
+	getImages(YOU);
+	// showScore(YOU);
 }
+
+// function boloRoll() {
+// 	// let dice = randomDice();
+// 	// console.log(dice);
+// 	showDice(YOU);
+// 	// boloPlay();
+// 	// updateScore(card, YOU);
+// 	showScore(YOU);
+// }
 
 function rollSound() {
 	let randSound = boloGame['diceSounds'][Math.floor(Math.random()*3)];
@@ -221,6 +235,52 @@ function boloKeep() {
 	console.log("We're here");
 }
 
-function changeID() {
+function changeID(diceNumber) {
 	console.log('Here we go');
+	if (die['dice-number-'+diceNumber]['status'] === 'roll') {
+		die['dice-number-'+diceNumber]['status'] = 'keep'
+	} else {
+		die['dice-number-'+diceNumber]['status'] === 'roll'
+	}
+	console.log(die['dice-number-'+diceNumber]);
 }
+
+// --------------------------------------
+
+function getValues(activePlayer) {
+
+	// Loop through and update the values of the die
+	for (i=1; i < numberOfDie+1; i++) {
+
+		// Check if dice should be rolled again
+		if (die['dice-number-'+i]['status'] === 'roll') {
+			
+			// Assign a value to each dice
+			die['dice-number-'+i]['value'] = randomDice();
+			die['dice-number-'+i]['image'] = `static/images/${die['dice-number-'+i]['value']}.png`;
+			console.log('Dice # '+i+' is '+ die['dice-number-'+i]['value']);
+			console.log(die['dice-number-'+i]);
+		}
+	}
+}
+
+function getImages(activePlayer) {
+	// Loop through and update the values of the die
+	for (i=1; i < numberOfDie+1; i++) {
+
+		let diceImage = document.createElement('img');
+		diceImage.src = 'static/images/'+die['dice-number-'+i]['value']+'.png';
+		
+		// Give the dice an ID
+		diceImage.id = 'dice-number-'+ i;
+		
+		// Make dice clickable
+		diceImage.onclick = boloKeep();
+		
+		diceImage.style.height = '50px';
+		diceImage.style.padding = '5px';
+		// console.log(diceImage);
+		document.querySelector(activePlayer['div']).appendChild(diceImage);
+	}
+}
+
